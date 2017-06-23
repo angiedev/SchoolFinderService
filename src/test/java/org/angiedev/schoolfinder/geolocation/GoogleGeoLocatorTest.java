@@ -14,7 +14,7 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes=org.angiedev.schoolfinder.TestApplicationConfiguration.class)
+@SpringBootTest(classes=org.angiedev.schoolfinder.SchoolFinderApplication.class)
 @ActiveProfiles("test")
 public class GoogleGeoLocatorTest {
 
