@@ -5,7 +5,6 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.*;
 import org.angiedev.schoolfinder.domain.District;
-import org.angiedev.schoolfinder.domain.DistrictRepository;
 import org.angiedev.schoolfinder.domain.School;
 import org.angiedev.schoolfinder.domain.SchoolRepository;
 import org.junit.Before;
