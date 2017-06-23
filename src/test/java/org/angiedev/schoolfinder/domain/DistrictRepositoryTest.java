@@ -1,65 +1,45 @@
 package org.angiedev.schoolfinder.domain;
 
-import static org.junit.Assert.*;
+import static org.assertj.core.api.Assertions.*;
 
-
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import org.angiedev.schoolfinder.domain.District;
 import org.angiedev.schoolfinder.domain.DistrictRepository;
-import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.transaction.annotation.Transactional;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes=org.angiedev.schoolfinder.TestApplicationConfiguration.class)
+@SpringBootTest(classes=org.angiedev.schoolfinder.SchoolFinderApplication.class)
 @ActiveProfiles("test")
-public class DistrictRepositoryTest {
+@Transactional
+public class DistrictRepositoryTest  {
 
+	@PersistenceContext
+	private EntityManager entityManager; 
+	
 	@Autowired 
 	DistrictRepository districtRepository;
-	
-	District  district1;
-	District district2;
-	District district3;
-	District district4;		
 			
-	@Before
-	public void setUp() {	
-		district1 = new District("ID-1", "District One");
-		district2 = new District( "ID-2", "District Two");
-		district3 = new District( "ID-3", "District Three");
-		district4 = new District("ID-4", "District Four");		
-				
-		districtRepository.save(district1);
-		districtRepository.save(district2);
-		districtRepository.save(district3);
-		districtRepository.save(district4);
-	}
-
 	@Test
-	public void findDistrictByValidLeaId() {
-		District district = districtRepository.findOneByLeaId(district1.getLeaId());
-		assertNotNull("Didn't find district", district);
-		assertEquals("Retrieved wrong district", district1.getDistrictId(), district.getDistrictId());
-		assertEquals("Retrieved wrond district name", district1.getName(), district.getName());
+	public void should_find_district_by_lea_id(){
+		District districtOne = new District("ID-1", "District One");
+		entityManager.persist(districtOne);
+		District found = districtRepository.findOneByLeaId("ID-1");
+		assertThat(found).isNotNull();
+		assertThat(found.getDistrictId()).isEqualTo(districtOne.getDistrictId());
+		assertThat(found.getName()).isEqualTo(districtOne.getName());
 	}
 	
 	@Test
-	public void findDistrictByInvalidLeaId() {
-		District district  = districtRepository.findOneByLeaId("BAD");
-		assertNull("Should not have found any districts", district);		
-	}
-	
-	@After
-	public void tearDown() {
-		districtRepository.delete(district1);
-		districtRepository.delete(district2);
-		districtRepository.delete(district3);
-		districtRepository.delete(district4);
+	public void should_not_find_district_by_lea_id_if_not_exist() {
+		District found  = districtRepository.findOneByLeaId("BAD");
+		assertThat(found).isNull();
 	}
 	
 }

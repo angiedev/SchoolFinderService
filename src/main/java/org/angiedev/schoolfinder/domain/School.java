@@ -103,6 +103,37 @@ public class School {
 		this.highGrade=highGrade;
 		this.district = district;
 	}
+	/** 
+	 * Creates an instance of a school.
+	 * @param ncesId		unique id for school assigned by the National Center for Education Statistics (NCES).
+	 * @param name			name of school.
+	 * @param streetAddress	street address of school.
+	 * @param city			the city the school is located in.
+	 * @param state_code	the state the school is located in.
+	 * @param zip			the zip code the school is located in.
+	 * @param status		the status provided by the NCES for the school. 
+	 * @param lowGrade		the lowest grade being taught at the school.
+	 * @param highGrade 	the highest grade being taught at the school.
+	 * @param district		the district the school belongs to.
+	 * @param latitude		the latitude geolocation of the school 
+	 * @param longitude		the longitude geolocation of the school 
+	 */
+	public School(String ncesId, String name, String streetAddress, String city, String stateCode, 
+			String zip, int status, String lowGrade, String highGrade, District district,
+			double latitude, double longitude) {
+		this.ncesId = ncesId;
+		this.name = name;
+		this.streetAddress = streetAddress;
+		this.city = city;
+		this.stateCode = stateCode;
+		this.zip = zip;
+		this.status = status;
+		this.lowGrade = lowGrade;
+		this.highGrade=highGrade;
+		this.district = district;
+		this.latitude = latitude;
+		this.longitude = longitude;
+	}
 	
 	public School() {
 	}
