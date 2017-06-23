@@ -13,10 +13,10 @@ import org.springframework.test.context.junit4.SpringRunner;
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes=org.angiedev.schoolfinder.SchoolFinderApplication.class)
 @ActiveProfiles("test")
-public class GoogleGeoLocatorTest {
+public class CensusGovLocatorTest {
 
 	@Autowired 
-	private GoogleGeoLocator geoLocator;
+	private CensusGovGeoLocator geoLocator;
 
 	@Test
 	public void should_return_geolocation_for_address() throws Exception {

@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 public class CensusGovGeoLocatorProperties {
 	private int readTimeout;
 	private int connectTimeout;
-	private String censusGovGeoLocatorUrl;
+	private String url;
 	
 	public int getReadTimeout() {
 		return readTimeout;
@@ -23,11 +23,11 @@ public class CensusGovGeoLocatorProperties {
 	public void setConnectTimeout(int connectTimeout) {
 		this.connectTimeout = connectTimeout;
 	}
-	public String getCensusGovGeoLocatorUrl() {
-		return censusGovGeoLocatorUrl;
+	public String getUrl() {
+		return url;
 	}
-	public void setCensusGovGeoLocatorUrl(String censusGovGeoLocatorUrl) {
-		this.censusGovGeoLocatorUrl = censusGovGeoLocatorUrl;
+	public void setUrl(String url) {
+		this.url = url;
 	}
 
 }

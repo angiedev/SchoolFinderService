@@ -28,7 +28,7 @@ public class CensusGovGeoLocator implements GeoLocator {
 		rest = builder.setConnectTimeout(props.getConnectTimeout())
 			.setReadTimeout(props.getReadTimeout())
 			.build();
-		censusGovGeoLocatorUrl = props.getCensusGovGeoLocatorUrl();
+		censusGovGeoLocatorUrl = props.getUrl();
 	}
 	
 	@Override

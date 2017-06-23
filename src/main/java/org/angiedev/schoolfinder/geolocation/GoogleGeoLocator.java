@@ -27,7 +27,7 @@ public class GoogleGeoLocator implements GeoLocator {
 		 rest = builder.setReadTimeout(props.getReadTimeout())
 		 	.setConnectTimeout(props.getConnectTimeout())
 		 	.build();
-		 googleGeoLocatorUrl = props.getGoogleGeoLocatorUrl();
+		 googleGeoLocatorUrl = props.getUrl();
 	 }
 	 
 	@Override

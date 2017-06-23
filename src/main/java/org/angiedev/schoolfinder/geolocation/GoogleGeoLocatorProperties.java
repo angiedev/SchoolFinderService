@@ -10,7 +10,7 @@ public class GoogleGeoLocatorProperties {
 	
 	private int readTimeout;
 	private int connectTimeout;
-	private String googleGeoLocatorUrl;
+	private String url;
 	
 	public int getReadTimeout() {
 		return readTimeout;
@@ -24,11 +24,11 @@ public class GoogleGeoLocatorProperties {
 	public void setConnectTimeout(int connectTimeout) {
 		this.connectTimeout = connectTimeout;
 	}
-	public String getGoogleGeoLocatorUrl() {
-		return googleGeoLocatorUrl;
+	public String getUrl() {
+		return url;
 	}
-	public void setGoogleGeoLocatorUrl(String googleGeoLocatorUrl) {
-		this.googleGeoLocatorUrl = googleGeoLocatorUrl;
+	public void setUrl(String url) {
+		this.url = url;
 	}
 
 }
