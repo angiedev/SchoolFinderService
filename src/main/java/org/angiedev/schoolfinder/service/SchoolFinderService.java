@@ -68,18 +68,20 @@ public class SchoolFinderService {
 	 * with a capitalized letter followed by lower case instead of being in all caps
 	 */
 	private void fixCapitalization(List<School> schools ) {
-		for (School s: schools) {
-			fixCapitalization(s);
+		for (School school: schools) {
+			fixCapitalization(school);
 		}
 	}
 	
 	/* Modifies the words in the school's name, street address, city to begin 
 	 * with a capitalized letter followed by lower case instead of being in all caps
 	 */
-	private void fixCapitalization(School s) {
-		char [] delims = {'(', ' '};
-		s.setName(WordUtils.capitalizeFully(s.getName(), delims));
-		s.setCity(WordUtils.capitalizeFully(s.getCity(), delims));
-		s.setStreetAddress(WordUtils.capitalizeFully(s.getStreetAddress(), delims));
+	private void fixCapitalization(School school) {
+		if (school != null) {
+			char [] delims = {'(', ' '};
+			school.setName(WordUtils.capitalizeFully(school.getName(), delims));
+			school.setCity(WordUtils.capitalizeFully(school.getCity(), delims));
+			school.setStreetAddress(WordUtils.capitalizeFully(school.getStreetAddress(), delims));
+		}
 	}
 }

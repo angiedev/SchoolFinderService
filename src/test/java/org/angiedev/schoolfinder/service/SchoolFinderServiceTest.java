@@ -84,7 +84,12 @@ public class SchoolFinderServiceTest {
 		Mockito.when(schoolRepository.findNearGeoLocationWithNameMatchingSearchString(
 				latitude, longitude, avgRadius, "NOTFOUND"))
 				.thenReturn(emptyList);
+	
+		Mockito.when(schoolRepository.findOneByNcesId("1"))
+			.thenReturn(school1);
 		
+		Mockito.when(schoolRepository.findOneByNcesId("NOTFOUND"))
+			.thenReturn(null);
 	}
 	
 	@Test
@@ -129,4 +134,15 @@ public class SchoolFinderServiceTest {
 		assertThat(foundSchools.size()).isEqualTo(0);
 	}
 
+	@Test 
+	public void should_get_school_by_ncesid() {
+		School foundSchool = schoolFinderService.getSchoolByNcesId("1");
+		assertThat(foundSchool).isEqualTo(school1);
+	}
+	
+	@Test 
+	public void should_not_get_school_with_ncesid_if_not_exist() {
+		School foundSchool = schoolFinderService.getSchoolByNcesId("NOTFOUND");
+		assertThat(foundSchool).isNull();
+	}
 }
