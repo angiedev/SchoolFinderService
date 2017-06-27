@@ -67,7 +67,7 @@ public class SchoolDataLoader implements CommandLineRunner {
      * Main method kicked off by Spring boot
      */
 	public static void main(String[] args) {
-		SpringApplication.run(SchoolDataLoader.class, args).close();
+		SpringApplication.run(SchoolDataLoader.class, args);
 	}
 	
 	/**

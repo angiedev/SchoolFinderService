@@ -58,7 +58,7 @@ public class SchoolGeoLocationLoader implements CommandLineRunner {
      * Main method kicked off by Spring boot
      */
 	public static void main(String[] args) {
-		SpringApplication.run(SchoolGeoLocationLoader.class, args).close();
+		SpringApplication.run(SchoolGeoLocationLoader.class, args);
 		
 	}
 	
