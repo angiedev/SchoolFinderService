@@ -7,7 +7,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.FilterType;
 
-//@SpringBootApplication No longer using because need to exlude CommandLine Runners
+//@SpringBootApplication No longer using because need to exclude CommandLine Runners
 @Configuration
 @ComponentScan(excludeFilters = @ComponentScan.Filter(type = FilterType.ASSIGNABLE_TYPE, value = CommandLineRunner.class))
 @EnableAutoConfiguration

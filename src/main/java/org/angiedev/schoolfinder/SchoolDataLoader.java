@@ -9,7 +9,11 @@ import org.angiedev.schoolfinder.domain.SchoolRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.FilterType;
 
 
 
@@ -42,7 +46,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  *   
  * @author Angela Gordon
  */
-@SpringBootApplication
+//@SpringBootApplication (No longer using because need to exclude SchoolGeoLocationLoader and SchoolFinderApplication)
+@Configuration
+@ComponentScan(excludeFilters = @ComponentScan.Filter(type = FilterType.ASSIGNABLE_TYPE, classes = {SchoolGeoLocationLoader.class, SchoolFinderApplication.class}))
+@EnableAutoConfiguration
 public class SchoolDataLoader implements CommandLineRunner {
 
 	// Data field positions in input file 
@@ -60,7 +67,7 @@ public class SchoolDataLoader implements CommandLineRunner {
      * Main method kicked off by Spring boot
      */
 	public static void main(String[] args) {
-		SpringApplication.run(SchoolDataLoader.class, args);
+		SpringApplication.run(SchoolDataLoader.class, args).close();
 	}
 	
 	/**

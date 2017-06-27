@@ -1,16 +1,21 @@
 package org.angiedev.schoolfinder;
 
+import java.io.IOException;
 import java.util.List;
 
 import org.angiedev.schoolfinder.domain.School;
 import org.angiedev.schoolfinder.domain.SchoolRepository;
 import org.angiedev.schoolfinder.geolocation.GeoLocation;
 import org.angiedev.schoolfinder.geolocation.GeoLocator;
+import org.angiedev.schoolfinder.geolocation.GoogleOverQueryLimitException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.FilterType;
 
 /**
  * SchoolGeoLocationLoader lookups and adds geo-location (longitude and latitude)
@@ -34,7 +39,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  *  </ul>
  * @author Angela Gordon
  */
-@SpringBootApplication
+//@SpringBootApplication (No longer using because need to exclude SchoolDataLoader and SchoolFinderApplication)
+@Configuration
+@ComponentScan(excludeFilters = @ComponentScan.Filter(type = FilterType.ASSIGNABLE_TYPE, classes = {SchoolDataLoader.class, SchoolFinderApplication.class}))
+@EnableAutoConfiguration
 public class SchoolGeoLocationLoader implements CommandLineRunner {
 
 	 @Autowired
@@ -50,7 +58,8 @@ public class SchoolGeoLocationLoader implements CommandLineRunner {
      * Main method kicked off by Spring boot
      */
 	public static void main(String[] args) {
-		SpringApplication.run(SchoolGeoLocationLoader.class, args);
+		SpringApplication.run(SchoolGeoLocationLoader.class, args).close();
+		
 	}
 	
 	 /**
@@ -67,7 +76,7 @@ public class SchoolGeoLocationLoader implements CommandLineRunner {
 		}
 		
 		loadGeoLocationData(args[0]);
-	
+		
 	}	 
 	 
 	 /** 
@@ -80,6 +89,7 @@ public class SchoolGeoLocationLoader implements CommandLineRunner {
 		 
 		 int numFailures = 0;
 		 int numSuccess = 0;
+		 outer:
 		 for (String stateCode: stateCodeList.split(",")) {
 			 System.out.println("Getting geo codes for schools in: " + stateCode);
 			// find addresses that need lat/long data 
@@ -96,7 +106,11 @@ public class SchoolGeoLocationLoader implements CommandLineRunner {
 					 school.setLongitude(geoLocation.getLongitude());
 					 schoolRepository.save(school);
 					 numSuccess++;
-				 } catch (Exception e) {
+				 } catch (GoogleOverQueryLimitException e) {
+					 System.out.println("Query limit reached when loading geo data for school " + school);
+					 numFailures++;
+					 break outer;
+				 } catch (IOException e) {
 					 System.out.println("Unable to complete load of geo location data for school " + school + "  Exception thrown: " +e);
 					 numFailures++;
 					 continue;

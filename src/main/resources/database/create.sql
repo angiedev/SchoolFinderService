@@ -1,0 +1,5 @@
+create table district (district_id integer not null auto_increment, lea_id varchar(7) not null, name varchar(120) not null, primary key (district_id))
+create table school (school_id integer not null auto_increment, city varchar(40) not null, high_grade varchar(2) not null, latitude FLOAT(10,6), longitude FLOAT(10,6), low_grade varchar(2) not null, name varchar(200) not null, nces_id varchar(12) not null, state_code varchar(2) not null, status integer not null, street_address varchar(100) not null, zip varchar(12) not null, district_id integer, primary key (school_id))
+alter table district add constraint UK_7qfigr91hoifouv6yve4qv5uw unique (lea_id)
+alter table school add constraint UK_ddvqcacs43uko3od1aqq7etv7 unique (nces_id)
+alter table school add constraint FK6etwflu5uvypwgxqluh5701aw foreign key (district_id) references district (district_id)

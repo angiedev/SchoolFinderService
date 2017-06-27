@@ -43,6 +43,8 @@ public class GoogleGeoLocator implements GeoLocator {
 		
 		if (result.getStatus().equals("OK")) {
 			return result.getGeoLocation();
+		} else if (result.getStatus().equals("OVER_QUERY_LIMIT")) {
+			throw new GoogleOverQueryLimitException();
 		} else {
 			throw new IOException("Unable to get GeoLocation for address: " + address 
 			+ "," + city + "," + stateCode + ".  GoogleGeoCode API returned status: " +

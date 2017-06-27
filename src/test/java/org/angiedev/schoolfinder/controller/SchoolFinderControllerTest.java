@@ -39,7 +39,7 @@ public class SchoolFinderControllerTest {
 	private final double outOfRangeLatitude = 37.78;
 	private final double outOfRangeLongitude = -122.40; 
 	private final int avgRadius = 10;
-	private School school1, school2, school3;
+	private School school1, school2;
 
 	@Before 
 	public void setUp() {
