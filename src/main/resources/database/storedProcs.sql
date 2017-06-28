@@ -12,7 +12,7 @@ BEGIN
       3956 * 2 * ASIN(SQRT( POWER(SIN((latitudeVal - latitude)*pi()/180/2),2)
 	  + COS(latitudeVal*pi()/180 ) * COS(latitude*pi()/180) 
       *POWER(SIN((longitudeVal-longitude)*pi()/180/2),2))) as distance
-   FROM School 
+   FROM school 
    WHERE  longitude between (longitudeVal- radiusVal/cos(radians(latitudeVal))*69) and
       (longitudeVal+ radiusVal/cos(radians(latitudeVal))*69) AND
       latitude between (latitudeVal-(radiusVal/69)) and (latitudeVal+(radiusVal/69))
@@ -32,7 +32,7 @@ BEGIN
       3956 * 2 * ASIN(SQRT( POWER(SIN((latitudeVal - latitude)*pi()/180/2),2)
 	  + COS(latitudeVal*pi()/180 ) * COS(latitude*pi()/180) 
       *POWER(SIN((longitudeVal-longitude)*pi()/180/2),2))) as distance
-   FROM School 
+   FROM school 
    WHERE  longitude between (longitudeVal- radiusVal/cos(radians(latitudeVal))*69) and
       (longitudeVal+ radiusVal/cos(radians(latitudeVal))*69) AND
       latitude between (latitudeVal-(radiusVal/69)) and (latitudeVal+(radiusVal/69)) and 

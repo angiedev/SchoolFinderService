@@ -35,15 +35,22 @@ public class CensusGovGeoLocator implements GeoLocator {
 	public GeoLocation getGeoLocationForAddress(String address, String city, 
 			String stateCode, String zip) throws IOException {
 		
-		CensusGovGeocodingLookupResult result = 
-			rest.getForObject(censusGovGeoLocatorUrl, CensusGovGeocodingLookupResult.class, address,
-					city, stateCode, zip);
+		CensusGovGeocodingLookupResult result = null;
+		
+		try {
+			result = rest.getForObject(censusGovGeoLocatorUrl, CensusGovGeocodingLookupResult.class, 
+					address, city, stateCode, zip);
+		} catch (Exception e) {
+			throw new IOException("Unable to get GeoLocation for address: " + address 
+				+ "," + city + "," + stateCode + ".  CensusGovGeoCode API threw exception: " + e);
+		}
 		if (result.getStatus().equals("OK")) {
 			return result.getGeoLocation();
 		} else {
 			throw new IOException("Unable to get GeoLocation for address: " + address 
-			+ "," + city + "," + stateCode + ".  CensusGovGeoCode API returned status: " +
-			result.getStatus());
+					+ "," + city + "," + stateCode + ".  CensusGovGeoCode API returned status: " +
+						result.getStatus());
 		}
+	
 	}
 }

@@ -20,7 +20,7 @@ public class SchoolFinderController {
 	
 	@GetMapping("/schools")
 	public List<School> searchForSchools(
-			@RequestParam(value="searchString", required=false) String searchString,
+			@RequestParam(value="schoolName", required=false) String searchString,
 			@RequestParam("lat") double latitude,
 			@RequestParam("long") double longitude, 
 			@RequestParam("radius") int searchRadius) {
